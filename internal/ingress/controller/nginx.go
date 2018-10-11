@@ -733,8 +733,8 @@ func (n *NGINXController) setupSSLProxy() {
 				continue
 			}
 
-			klog.V(3).Infof("Handling connection from remote address %s to local %s", conn.RemoteAddr(), conn.LocalAddr())
-			go n.Proxy.Handle(conn)
+			glog.V(3).Infof("Handling connection from remote address %s to local %s", conn.RemoteAddr(), conn.LocalAddr())
+			go n.Proxy.Handle(conn, n.runningConfig)
 		}
 	}()
 }
