@@ -95,7 +95,7 @@ func (p *TCPProxy) Handle(conn net.Conn, config *ingress.Configuration) {
 			for _, CIDR := range location.Whitelist.CIDR {
 				_, network, err := net.ParseCIDR(CIDR)
 				if err != nil {
-					glog.Fatalf("%v", err)
+					klog.Fatalf("%v", err)
 				}
 
 				if network.Contains(net.ParseIP(remoteAddr.IP.String())) {
@@ -105,7 +105,7 @@ func (p *TCPProxy) Handle(conn net.Conn, config *ingress.Configuration) {
 			}
 		}
 		if !check {
-			glog.V(4).Infof("Whitelisting is not allowing this connection.")
+			klog.V(4).Infof("Whitelisting is not allowing this connection.")
 			return
 		}
 		break
